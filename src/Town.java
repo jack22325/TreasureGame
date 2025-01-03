@@ -10,6 +10,10 @@ public class Town
     private Terrain terrain;
     private String printMessage;
     private boolean toughTown;
+    private String treasure;
+    private static boolean foundDiamond;
+    private static boolean foundRuby;
+    private static boolean foundEmerald;
 
     //Constructor
     /**
@@ -30,6 +34,23 @@ public class Town
 
         // higher toughness = more likely to be a tough town
         toughTown = (Math.random() < toughness);
+        int randomNum = (int) (Math.random()*3 + 1);
+        if(randomNum == 1)
+        {
+            treasure = "diamond";
+        }
+        else if(randomNum == 2)
+        {
+            treasure = "ruby";
+        }
+        else if(randomNum == 3)
+        {
+            treasure = "emerald";
+        }
+    }
+
+    public String getTreasure() {
+        return treasure;
     }
 
     public String getLatestNews()
@@ -168,5 +189,63 @@ public class Town
     {
         double rand = Math.random();
         return (rand < 0.5);
+    }
+
+    public void treasureHunt()
+    {
+        if(TreasureHunter.getTreasureFound())
+        {
+            System.out.println("You have to go to another town.");
+        }
+        else
+        {
+            int randomNum = (int) (Math.random()*2 + 1);
+            if(randomNum == 1)
+            {
+                System.out.println(treasure);
+                if(treasure.equals("diamond"))
+                {
+                    if(foundDiamond)
+                    {
+                        System.out.println("Already found a diamond.");
+                    }
+                    else
+                    {
+                        foundDiamond = true;
+                    }
+                }
+                if(treasure.equals("ruby"))
+                {
+                    if(foundRuby)
+                    {
+                        System.out.println("Already found a ruby.");
+                    }
+                    else
+                    {
+                        foundRuby = true;
+                    }
+                }
+                if(treasure.equals("emerald"))
+                {
+                    if(foundEmerald)
+                    {
+                        System.out.println("Already found an emerald.");
+                    }
+                    else
+                    {
+                        foundEmerald = true;
+                    }
+                }
+            }
+            else
+            {
+                System.out.println("No treasure here.");
+            }
+        }
+        TreasureHunter.setTreasureFoundToTrue();
+        if(foundDiamond||foundRuby||foundEmerald)
+        {
+            System.out.println("You found all three treasures, congratulations!");
+        }
     }
 }

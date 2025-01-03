@@ -12,6 +12,7 @@ public class TreasureHunter
     private Town currentTown;
     private Hunter hunter;
     private boolean hardMode;
+    private static boolean treasureFound;
 
     //Constructor
     /**
@@ -56,11 +57,22 @@ public class TreasureHunter
         }
     }
 
+    public static boolean getTreasureFound()
+    {
+        return treasureFound;
+    }
+
+    public static void setTreasureFoundToTrue()
+    {
+        treasureFound = true;
+    }
+
     /**
      * Creates a new town and adds the Hunter to it.
      */
     private void enterTown()
     {
+        treasureFound = false;
         double markdown = 0.25;
         double toughness = 0.4;
         if (hardMode)
