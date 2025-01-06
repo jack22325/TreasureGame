@@ -111,7 +111,7 @@ public class TreasureHunter
         Scanner scanner = new Scanner(System.in);
         String choice = "";
 
-        while ((!(choice.equals("X") || choice.equals("x")))&&(!Town.foundAllThree()))
+        while ((!(choice.equals("X") || choice.equals("x")))&&(!Town.foundAllThree())&&(!Town.isHasNoGold()))
         {
             System.out.println();
             System.out.println(currentTown.getLatestNews());

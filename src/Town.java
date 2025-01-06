@@ -14,6 +14,7 @@ public class Town
     private static boolean foundDiamond;
     private static boolean foundRuby;
     private static boolean foundEmerald;
+    private static boolean hasNoGold;
 
     //Constructor
     /**
@@ -147,8 +148,16 @@ public class Town
                 printMessage += "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
                 printMessage += "\nYou lost the brawl and pay " +  goldDiff + " gold.";
                 hunter.changeGold(-1 * goldDiff);
+                if (hunter.getGold() == 0) {
+                    System.out.println("You now have 0 gold.");
+                    hasNoGold = true;
+                }
             }
         }
+    }
+
+    public static boolean isHasNoGold() {
+        return hasNoGold;
     }
 
     public String toString()
