@@ -53,6 +53,11 @@ public class Town
         return treasure;
     }
 
+    public static boolean foundAllThree()
+    {
+        return foundDiamond&&foundRuby&&foundEmerald;
+    }
+
     public String getLatestNews()
     {
         return printMessage;
@@ -211,7 +216,6 @@ public class Town
                     }
                     else
                     {
-                        TreasureHunter.setTreasureFoundToTrue();
                         foundDiamond = true;
                     }
                 }
@@ -223,7 +227,6 @@ public class Town
                     }
                     else
                     {
-                        TreasureHunter.setTreasureFoundToTrue();
                         foundRuby = true;
                     }
                 }
@@ -235,7 +238,6 @@ public class Town
                     }
                     else
                     {
-                        TreasureHunter.setTreasureFoundToTrue();
                         foundEmerald = true;
                     }
                 }
@@ -245,6 +247,7 @@ public class Town
                 System.out.println("No treasure here.");
             }
         }
+        TreasureHunter.setTreasureFoundToTrue();
         if(foundDiamond&&foundRuby&&foundEmerald)
         {
             System.out.println("You found all three treasures, congratulations!");

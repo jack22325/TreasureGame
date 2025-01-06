@@ -10,8 +10,8 @@ public class Shop
     private static final int WATER_COST = 2;
     private static final int ROPE_COST = 4;
     private static final int MACHETE_COST = 6;
-    private static final int HORSE_COST = 12;
-    private static final int BOAT_COST = 20;
+    private static final int HORSE_COST = 1;
+    private static final int BOAT_COST = 2;
 
     // instance variables
     private double markdown;
