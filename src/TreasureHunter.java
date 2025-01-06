@@ -112,11 +112,11 @@ public class TreasureHunter
     {
         Scanner scanner = new Scanner(System.in);
         String choice = "";
-        if(!menuShownOnce)
         {
             while ((!(choice.equals("X") || choice.equals("x")))&&(!Town.foundAllThree())&&(!Town.isHasNoGold()))
             {
-                System.out.println();
+                if (!menuShownOnce){
+                    System.out.println();
                 System.out.println(currentTown.getLatestNews());
                 System.out.println("***");
                 System.out.println(hunter);
@@ -132,12 +132,8 @@ public class TreasureHunter
                 choice = scanner.nextLine();
                 choice = choice.toUpperCase();
                 processChoice(choice);
-            }
-        }
-        else
-        {
-            while ((!(choice.equals("X") || choice.equals("x")))&&(!Town.foundAllThree())&&(!Town.isHasNoGold()))
-            {
+                menuShownOnce = true;
+                }
                 System.out.println();
                 System.out.println(currentTown.getLatestNews());
                 System.out.println("***");
@@ -156,7 +152,7 @@ public class TreasureHunter
                 processChoice(choice);
             }
         }
-        menuShownOnce = true;
+
     }
 
     /**
