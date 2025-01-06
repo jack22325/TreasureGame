@@ -13,6 +13,7 @@ public class TreasureHunter
     private Hunter hunter;
     private boolean hardMode;
     private static boolean treasureFound;
+    private boolean menuShownOnce;
 
     //Constructor
     /**
@@ -21,6 +22,7 @@ public class TreasureHunter
     public TreasureHunter()
     {
         // these will be initialized in the play method
+        menuShownOnce = false;
         currentTown = null;
         hunter = null;
         hardMode = false;
@@ -110,26 +112,51 @@ public class TreasureHunter
     {
         Scanner scanner = new Scanner(System.in);
         String choice = "";
-
-        while ((!(choice.equals("X") || choice.equals("x")))&&(!Town.foundAllThree())&&(!Town.isHasNoGold()))
+        if(!menuShownOnce)
         {
-            System.out.println();
-            System.out.println(currentTown.getLatestNews());
-            System.out.println("***");
-            System.out.println(hunter);
-            System.out.println(currentTown);
-            System.out.println("(B)uy something at the shop.");
-            System.out.println("(S)ell something at the shop.");
-            System.out.println("(M)ove on to a different town.");
-            System.out.println("(L)ook for trouble!");
-            System.out.println("(H)unt for treasure!");
-            System.out.println("Give up the hunt and e(X)it.");
-            System.out.println();
-            System.out.print("What's your next move? ");
-            choice = scanner.nextLine();
-            choice = choice.toUpperCase();
-            processChoice(choice);
+            while ((!(choice.equals("X") || choice.equals("x")))&&(!Town.foundAllThree())&&(!Town.isHasNoGold()))
+            {
+                System.out.println();
+                System.out.println(currentTown.getLatestNews());
+                System.out.println("***");
+                System.out.println(hunter);
+                System.out.println(currentTown);
+                System.out.println("(B)uy something at the shop.");
+                System.out.println("(S)ell something at the shop.");
+                System.out.println("(M)ove on to a different town.");
+                System.out.println("(L)ook for trouble!");
+                System.out.println("(H)unt for treasure!");
+                System.out.println("Give up the hunt and e(X)it.");
+                System.out.println();
+                System.out.print("What's your next move? ");
+                choice = scanner.nextLine();
+                choice = choice.toUpperCase();
+                processChoice(choice);
+            }
         }
+        else
+        {
+            while ((!(choice.equals("X") || choice.equals("x")))&&(!Town.foundAllThree())&&(!Town.isHasNoGold()))
+            {
+                System.out.println();
+                System.out.println(currentTown.getLatestNews());
+                System.out.println("***");
+                System.out.println(hunter);
+                System.out.println(currentTown);
+                System.out.print("(B)");
+                System.out.print("(S)");
+                System.out.print("(M)");
+                System.out.print("(L)");
+                System.out.print("(H)");
+                System.out.print("(X)");
+                System.out.println();
+                System.out.print("What's your next move? ");
+                choice = scanner.nextLine();
+                choice = choice.toUpperCase();
+                processChoice(choice);
+            }
+        }
+        menuShownOnce = true;
     }
 
     /**
