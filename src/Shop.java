@@ -154,23 +154,23 @@ public class Shop
      */
     public int getCostOfItem(String item)
     {
-        if (item.equals("Water"))
+        if (item.equals("Water") || item.equals("water"))
         {
             return WATER_COST;
         }
-        else if (item.equals("Rope"))
+        else if (item.equals("Rope")|| item.equals("rope"))
         {
             return ROPE_COST;
         }
-        else if (item.equals("Machete"))
+        else if (item.equals("Machete")|| item.equals("machete"))
         {
             return MACHETE_COST;
         }
-        else if (item.equals("Horse"))
+        else if (item.equals("Horse")|| item.equals("horse"))
         {
             return HORSE_COST;
         }
-        else if (item.equals("Boat"))
+        else if (item.equals("Boat")|| item.equals("boat"))
         {
             return BOAT_COST;
         }
@@ -178,6 +178,7 @@ public class Shop
         {
             return 0;
         }
+
     }
 
     /**
