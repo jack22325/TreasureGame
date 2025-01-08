@@ -2,6 +2,7 @@
  * The Town Class is where it all happens.
  * The Town is designed to manage all of the things a Hunter can do in town.
  */
+import java.util.Scanner;
 public class Town
 {
     //instance variables
@@ -204,7 +205,35 @@ public class Town
         }
     }
 
-
+    public void Casino()
+    {
+        Scanner scanner = new Scanner(System.in);
+        if (hunter.getGold() == 0){
+            System.out.println("You can't play at the casino");
+        }
+        else {
+            System.out.println("Lucky Dice\nTwo six-sided dice will be rolled and added up. The rules for the game are:\n" +
+                    "- If the hunter gets the number exactly right, they get double their gold!\n" +
+                    "- If the hunter gets within 2 of the number, they get their gold back.\n" +
+                    "- if the hunter is more than 2 away from the number, they lose all of their gold\n");
+            System.out.println("How much would you like to wager?");
+            int amount = scanner.nextInt();
+            System.out.println("Pick a number from 1-12");
+            int pick = scanner.nextInt();
+            if (amount > hunter.getGold())
+            {
+                System.out.println("You don't have this much gold. Enter new amount: ");
+                 amount = scanner.nextInt();
+            }
+            int random = (int) (Math.random() * 5 ) + 1;
+            int random2 = (int) (Math.random() * 5 ) + 1;
+            int total = random2 + random;
+            if (pick == total)
+            {
+                
+            }
+        }
+    }
 
     public String toString()
     {
