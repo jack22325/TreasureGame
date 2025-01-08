@@ -119,38 +119,47 @@ public class Town
      */
     public void lookForTrouble()
     {
-        double noTroubleChance;
-        if (toughTown)
+        if(TreasureHunter.isCheatMode())
         {
-            noTroubleChance = 0.66;
+            printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
+            printMessage += "\nYou won the brawl and receive " +  100 + " gold.";
+            hunter.changeGold(100);
         }
         else
         {
-            noTroubleChance = 0.33;
-        }
-
-        if (Math.random() > noTroubleChance)
-        {
-            printMessage = "You couldn't find any trouble";
-        }
-        else
-        {
-            printMessage = "You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n";
-            int goldDiff = (int)(Math.random() * 10) + 1;
-            if (Math.random() > noTroubleChance)
+            double noTroubleChance;
+            if (toughTown)
             {
-                printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
-                printMessage += "\nYou won the brawl and receive " +  goldDiff + " gold.";
-                hunter.changeGold(goldDiff);
+                noTroubleChance = 0.66;
             }
             else
             {
-                printMessage += "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
-                printMessage += "\nYou lost the brawl and pay " +  goldDiff + " gold.";
-                hunter.changeGold(-1 * goldDiff);
-                if (hunter.getGold() == 0) {
-                    System.out.println("You now have 0 gold.");
-                    hasNoGold = true;
+                noTroubleChance = 0.33;
+            }
+
+            if (Math.random() > noTroubleChance)
+            {
+                printMessage = "You couldn't find any trouble";
+            }
+            else
+            {
+                printMessage = "You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n";
+                int goldDiff = (int)(Math.random() * 10) + 1;
+                if (Math.random() > noTroubleChance)
+                {
+                    printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
+                    printMessage += "\nYou won the brawl and receive " +  goldDiff + " gold.";
+                    hunter.changeGold(goldDiff);
+                }
+                else
+                {
+                    printMessage += "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
+                    printMessage += "\nYou lost the brawl and pay " +  goldDiff + " gold.";
+                    hunter.changeGold(-1 * goldDiff);
+                    if (hunter.getGold() == 0) {
+                        System.out.println("You now have 0 gold.");
+                        hasNoGold = true;
+                    }
                 }
             }
         }

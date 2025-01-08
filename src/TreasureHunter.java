@@ -14,6 +14,7 @@ public class TreasureHunter
     private boolean hardMode;
     private static boolean treasureFound;
     private boolean menuShownOnce;
+    private static boolean cheatMode;
 
     //Constructor
     /**
@@ -57,6 +58,14 @@ public class TreasureHunter
         {
             hardMode = true;
         }
+        if (hard.equals("secret cheat mode"))
+        {
+            cheatMode = true;
+        }
+    }
+
+    public static boolean isCheatMode() {
+        return cheatMode;
     }
 
     public static boolean getTreasureFound()
