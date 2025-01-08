@@ -15,6 +15,7 @@ public class TreasureHunter
     private static boolean treasureFound;
     private boolean menuShownOnce;
     private static boolean cheatMode;
+    public static boolean easyMode;
 
     //Constructor
     /**
@@ -54,6 +55,16 @@ public class TreasureHunter
 
         System.out.print("Hard mode? (y/n): ");
         String hard = scanner.nextLine();
+
+        if (hard.equals("n")||hard.equals("N"))
+        {
+            System.out.print("Easy mode? (y/n): ");
+            String easy = scanner.nextLine();
+            if (easy.equals("y")||easy.equals("Y"))
+            {
+                easyMode = true;
+            }
+        }
         if (hard.equals("y") || hard.equals("Y"))
         {
             hardMode = true;
@@ -66,6 +77,10 @@ public class TreasureHunter
 
     public static boolean isCheatMode() {
         return cheatMode;
+    }
+
+    public static boolean isEasyMode() {
+        return easyMode;
     }
 
     public static boolean getTreasureFound()

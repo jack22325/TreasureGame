@@ -83,6 +83,10 @@ public class Town
         }
     }
 
+    public static boolean isHasNoGold() {
+        return hasNoGold;
+    }
+
     /**
      * Handles the action of the Hunter leaving the town.
      * @return true if the Hunter was able to leave town.
@@ -125,7 +129,42 @@ public class Town
             printMessage += "\nYou won the brawl and receive " +  100 + " gold.";
             hunter.changeGold(100);
         }
-        else
+        else if (TreasureHunter.isEasyMode())
+        {
+            double noTroubleChance;
+            if (toughTown)
+            {
+                noTroubleChance = 0.66;
+            }
+            else
+            {
+                noTroubleChance = 0.33;
+            }
+
+            if (Math.random()/2 > noTroubleChance)
+            {
+                printMessage = "You couldn't find any trouble";
+            }
+            else {
+                printMessage = "You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n";
+                int goldDiff = (int) (Math.random() * 30) + 1;
+                double chance = Math.random() * 2;
+                if (chance> noTroubleChance) {
+                    printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
+                    printMessage += "\nYou won the brawl and receive " + goldDiff + " gold.";
+                    System.out.println(toughTown);
+                    hunter.changeGold(goldDiff);
+                } else {
+                    printMessage += "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
+                    printMessage += "\nYou lost the brawl and pay " + goldDiff + " gold.";
+                    hunter.changeGold(-1 * goldDiff);
+                    if (hunter.getGold() == 0) {
+                        System.out.println("You now have 0 goldj.");
+                        hasNoGold = true;
+                    }
+                }
+            }
+        } else
         {
             double noTroubleChance;
             if (toughTown)
@@ -165,9 +204,7 @@ public class Town
         }
     }
 
-    public static boolean isHasNoGold() {
-        return hasNoGold;
-    }
+
 
     public String toString()
     {

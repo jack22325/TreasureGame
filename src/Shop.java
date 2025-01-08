@@ -28,6 +28,14 @@ public class Shop
             HORSE_COST = 1;
             BOAT_COST = 1;
         }
+        if (TreasureHunter.isEasyMode())
+        {
+            WATER_COST = 1;
+            ROPE_COST = 2;
+            MACHETE_COST = 3;
+            HORSE_COST = 6;
+            BOAT_COST = 10;
+        }
         this.markdown = markdown;
         customer = null;
     }
