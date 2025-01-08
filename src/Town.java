@@ -152,7 +152,6 @@ public class Town
                 if (chance> noTroubleChance) {
                     printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
                     printMessage += "\nYou won the brawl and receive " + goldDiff + " gold.";
-                    System.out.println(toughTown);
                     hunter.changeGold(goldDiff);
                 } else {
                     printMessage += "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
