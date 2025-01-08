@@ -154,11 +154,12 @@ public class Town
                     printMessage += "\nYou won the brawl and receive " + goldDiff + " gold.";
                     hunter.changeGold(goldDiff);
                 } else {
+                     goldDiff = (int) (Math.random()* 5)+1;
                     printMessage += "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
                     printMessage += "\nYou lost the brawl and pay " + goldDiff + " gold.";
                     hunter.changeGold(-1 * goldDiff);
                     if (hunter.getGold() == 0) {
-                        System.out.println("You now have 0 goldj.");
+                        System.out.println("You now have 0 gold.");
                         hasNoGold = true;
                     }
                 }
