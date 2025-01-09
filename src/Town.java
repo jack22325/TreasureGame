@@ -207,6 +207,7 @@ public class Town
 
     public void Casino()
     {
+        int hunterOriginalGold = hunter.getGold();
         Scanner scanner = new Scanner(System.in);
         if (hunter.getGold() == 0){
             System.out.println("You can't play at the casino");
@@ -218,19 +219,35 @@ public class Town
                     "- if the hunter is more than 2 away from the number, they lose all of their gold\n");
             System.out.println("How much would you like to wager?");
             int amount = scanner.nextInt();
-            System.out.println("Pick a number from 1-12");
-            int pick = scanner.nextInt();
-            if (amount > hunter.getGold())
+            if (amount <= hunter.getGold())
+            {
+                hunter.changeGold(-1 * amount);
+            }
+            while (amount > hunterOriginalGold)
             {
                 System.out.println("You don't have this much gold. Enter new amount: ");
-                 amount = scanner.nextInt();
+                amount = scanner.nextInt();
+                if (amount <= hunter.getGold())
+                {
+                    hunter.changeGold(-1 * amount);
+                }
             }
+            System.out.println("Pick a number from 1-12");
+            int pick = scanner.nextInt();
             int random = (int) (Math.random() * 5 ) + 1;
             int random2 = (int) (Math.random() * 5 ) + 1;
             int total = random2 + random;
             if (pick == total)
             {
-                
+                System.out.println("The number was " + total +".You doubled your wager!");
+                hunter.changeGold(amount*2);
+            } else if ((Math.abs(pick - total)== 1) || (Math.abs(pick - total)== 2))
+            {
+                System.out.println("The number was " + total +".You didn't lose anything");
+                hunter.changeGold(amount);
+            } else
+            {
+                System.out.println("The number was " + total +".You lost your gold.");
             }
         }
     }
