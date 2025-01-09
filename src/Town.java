@@ -16,6 +16,7 @@ public class Town
     private static boolean foundRuby;
     private static boolean foundEmerald;
     private static boolean hasNoGold;
+    private static int luck;
 
     //Constructor
     /**
@@ -31,7 +32,7 @@ public class Town
         // the hunter gets set using the hunterArrives method, which
         // gets called from a client class
         hunter = null;
-
+        luck = 0;
         printMessage = "";
 
         // higher toughness = more likely to be a tough town
@@ -49,6 +50,10 @@ public class Town
         {
             treasure = "emerald";
         }
+    }
+
+    public static int getLuck() {
+        return luck;
     }
 
     public String getTreasure() {
@@ -216,7 +221,9 @@ public class Town
             System.out.println("Lucky Dice\nTwo six-sided dice will be rolled and added up. The rules for the game are:\n" +
                     "- If the hunter gets the number exactly right, they get double their gold!\n" +
                     "- If the hunter gets within 2 of the number, they get their gold back.\n" +
-                    "- if the hunter is more than 2 away from the number, they lose all of their gold\n");
+                    "- if the hunter is more than 2 away from the number, they lose all of their gold\n" + "Luck: As you win gold in the Casino, your \"Luck\" increases. The more luck you have, the more likely it is you will find a treasure in the town.\nFor every 10 gold you win in ANY Casino (in any town), your % chance to find a treasure should go up by 2." +
+                    "\n" +
+                    "For every 10 gold you lose, your % chance to find a treasure should go down by 2.\n");
             System.out.println("How much would you like to wager?");
             int amount = scanner.nextInt();
             if (amount <= hunter.getGold())
@@ -239,7 +246,19 @@ public class Town
             int total = random2 + random;
             if (pick == total)
             {
+                int goldWon =amount*2;
+                int increaseAmount = 0;
                 System.out.println("The number was " + total +".You doubled your wager!");
+                if (goldWon >= 10)
+                {
+                    while (!(goldWon <= 10))
+                    {
+                    goldWon -= 10;
+                    increaseAmount += 2;
+                    }
+                System.out.println("Your luck increased by " + increaseAmount);
+                luck += increaseAmount;
+                }
                 hunter.changeGold(amount*2);
             } else if ((Math.abs(pick - total)== 1) || (Math.abs(pick - total)== 2))
             {
@@ -247,6 +266,12 @@ public class Town
                 hunter.changeGold(amount);
             } else
             {
+                int goldLost = amount;
+                if (goldLost >= 10) {
+                    System.out.println("Your luck decreased by 2!");
+                    goldLost += 10;
+                    luck -= 2;
+                }
                 System.out.println("The number was " + total +".You lost your gold.");
             }
         }
@@ -299,14 +324,15 @@ public class Town
 
     public void treasureHunt()
     {
+        double treasureChance = .50 + (double) luck /100;
         if(TreasureHunter.getTreasureFound())
         {
             System.out.println("You have to go to another town.");
         }
         else
         {
-            int randomNum = (int) (Math.random()*2 + 1);
-            if(randomNum == 1)
+            double randomNum = Double.parseDouble(String.format("%.2f", Math.random()));
+            if(randomNum <= treasureChance)
             {
                 System.out.println(treasure);
                 if(treasure.equals("diamond"))
@@ -346,6 +372,7 @@ public class Town
             else
             {
                 System.out.println("No treasure here.");
+                System.out.println(treasureChance);
             }
         }
         TreasureHunter.setTreasureFoundToTrue();
